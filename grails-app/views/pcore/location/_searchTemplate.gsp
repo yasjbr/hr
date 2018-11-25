@@ -1,0 +1,80 @@
+<div style="padding-right: 40px;,padding-bottom: 15px;">
+    <h4 class=" smaller lighter blue">
+        ${message(code: 'location.label')}</h4> <hr/></div>
+<br/>
+
+<el:formGroup>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=""
+            controller="pcore"
+            action="countryAutoComplete"
+            name="${prefix?prefix+'.':''}country.id"
+            label="${message(code:'location.country.label',default:'country')}"/>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=""
+            controller="pcore"
+            paramsGenerateFunction="governorateParams"
+            action="governorateAutoComplete"
+            name="${prefix?prefix+'.':''}governorate.id"
+            label="${message(code:'location.governorate.label',default:'governorate')}"/>
+</el:formGroup>
+<el:formGroup>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=""
+            controller="pcore"
+            action="localityAutoComplete"
+            paramsGenerateFunction="localityParams"
+            name="${prefix?prefix+'.':''}locality.id"
+            label="${message(code:'location.locality.label',default:'locality')}"/>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=" "
+            controller="pcore"
+            paramsGenerateFunction="blockParam"
+            action="blockAutoComplete"
+            name="${prefix?prefix+'.':''}block.id"
+            label="${message(code:'location.block.label',default:'block')}"/>
+</el:formGroup>
+<el:formGroup>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=""
+            controller="pcore"
+            action="streetAutoComplete"
+            name="${prefix?prefix+'.':''}street.id"
+            paramsGenerateFunction="streetParam"
+            label="${message(code:'location.street.label',default:'street')}"/>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class="" controller="pcore"
+            action="buildingAutoComplete"
+            name="${prefix?prefix+'.':''}building.id"
+            paramsGenerateFunction="buildingParam"
+            label="${message(code:'location.building.label',default:'building')}"/>
+</el:formGroup>
+<el:formGroup>
+    <el:autocomplete
+            optionKey="id"
+            optionValue="name"
+            size="6"
+            class=""
+            controller="pcore"
+            action="areaClassAutoComplete"
+            name="${prefix?prefix+'.':''}areaClass.id"
+            label="${message(code:'location.areaClass.label',default:'areaClass')}"/>
+</el:formGroup>

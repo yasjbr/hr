@@ -1,0 +1,205 @@
+buildscript {
+    ext {
+        grailsVersion = project.grailsVersion
+    }
+    repositories {
+        mavenLocal()
+        maven { url "${repositoryUrl}/core-grails-ssl" }
+        maven { url "${repositoryUrl}/grails" }
+        maven { url "${repositoryUrl}/grails-repo" }
+        maven { url "${repositoryUrl}/central" }
+        maven { url "${repositoryUrl}/plugins" }
+        maven { url "${repositoryUrl}/libraries" }
+        maven { url "${repositoryUrl}/extensions" }
+        maven { url "${repositoryUrl}/libs-release" }
+        maven { url "${repositoryUrl}/libs-release-local" }
+        maven { url "${repositoryUrl}/libs-snapshot-local" }
+        maven { url "${repositoryUrl}/plugins-release-local" }
+        maven { url "${repositoryUrl}/plugins-snapshot-local" }
+        maven { url "${repositoryUrl}/core-grails" }
+        maven { url "${repositoryUrl}/plugins-grails" }
+    }
+
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0"
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
+        classpath "org.grails.plugins:hibernate4:5.0.10"
+        classpath "ps.police.plugins:scaffolding:0.1"
+    }
+}
+
+
+
+
+
+version "0.1"
+group "phr"
+
+apply plugin: "com.jfrog.artifactory"
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "war"
+apply plugin: "org.grails.grails-web"
+apply plugin: "org.grails.grails-gsp"
+apply plugin: "asset-pipeline"
+
+ext {
+    grailsVersion = project.grailsVersion
+    gradleWrapperVersion = project.gradleWrapperVersion
+}
+
+repositories {
+    mavenLocal()
+    maven { url "${repositoryUrl}/core-grails-ssl" }
+    maven { url "${repositoryUrl}/plugins" }
+    maven { url "${repositoryUrl}/libraries" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    applyMavenExclusions false
+}
+
+dependencies {
+
+    //profile
+    profile "org.grails.profiles:web"
+    //compile
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    compile "org.grails:grails-dependencies"
+    compile "org.grails:grails-web-boot"
+    compile "org.grails.plugins:cache"
+    compile "org.grails.plugins:hibernate4"
+    compile "org.hibernate:hibernate-ehcache"
+    console "org.grails:grails-console"
+    //runtime
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
+    runtime "com.h2database:h2"
+    //provided: 'for deployment'
+    provided "org.springframework.boot:spring-boot-starter-tomcat"
+    ////<--added plugins-->>
+    //scaffolding
+    compile ('ps.police.plugins:scaffolding:0.1'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //GUI
+    compile ('ps.police.plugins:gui:0.2.55'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //dto
+    compile ('ps.police.plugins:dto:0.1'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //workflow
+    compile ('ps.police.plugins:workflow:0.1.17'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+
+    //shared beans
+    compile ('ps.police.libraries:signatures:0.2.71'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //remoting
+    compile('ps.police.plugins:remoting:0.1') {
+        exclude group: 'org.grails', module: 'grails-datastore-gorm-hibernate'
+    }
+    //audit
+    compile ('ps.police.plugins:audit:0.1.5'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //<--for security-->>
+    //contains core and cas
+    compile ('ps.police.plugins:security:0.1.18'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    //report
+    compile ('ps.police.plugins:report:0.1.9'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+    compile fileTree(dir: 'lib', include: '*.jar')
+    // file management plugin
+    compile ('ps.police.plugins:attachment:0.2.16'){
+        exclude group: 'org.grails' , module: 'grails-datastore-gorm-hibernate'
+    }
+
+    // Add Quartz plugin for jobs
+    compile 'org.grails.plugins:quartz:2.0.13'
+
+    runtime 'net.sourceforge.jexcelapi:jxl:2.6.12'
+
+    compile 'org.apache.poi:poi:3.9'
+    compile 'org.apache.poi:poi-ooxml:3.9'
+
+    //for firm plugin
+//    compile "plugin$firm:plugin$firmName:0.1"
+    //<--for testing-->>
+    testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.grails.plugins:geb"
+    testCompile 'ps.police.plugins:build-data:0.1'
+    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    testCompile 'org.grails:grails-datastore-test-support'
+}
+
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}
+
+assets {
+    minifyJs = true
+    minifyCss = true
+}
+
+//don't change these line
+String commonPackages = "ps.police.pcore.v2.entity..*,ps.gov.epsilon.core..*,ps.gov.epsilon.hr.common..*"
+String firmPackage = "ps.gov.epsilon.hr.firm.Firm,ps.gov.epsilon.hr.firm.FirmController,ps.gov.epsilon.hr.firm.FirmService,"
+String departmentPackage = "ps.gov.epsilon.hr.firm.Department,ps.gov.epsilon.hr.firm.DepartmentController,ps.gov.epsilon.hr.firm.DepartmentService,"
+String departmentContactInfoPackage = "ps.gov.epsilon.hr.firm.DepartmentContactInfo,ps.gov.epsilon.hr.firm.DepartmentContactInfoController,ps.gov.epsilon.hr.firm.DepartmentContactInfoService,"
+String joinedDepartmentOperationalTasksPackage = "ps.gov.epsilon.hr.firm.JoinedDepartmentOperationalTasks,ps.gov.epsilon.hr.firm.JoinedDepartmentOperationalTasksController,ps.gov.epsilon.hr.firm.JoinedDepartmentOperationalTasksService,"
+String hrModulePackages = "ps.gov.epsilon.hr.firm.audit..*,ps.gov.epsilon.hr.firm.absence..*,ps.gov.epsilon.hr.firm.allowance..*,ps.gov.epsilon.hr.firm.child..*,ps.gov.epsilon.hr.firm.correspondenceList..*,ps.gov.epsilon.hr.firm.disciplinary..*,ps.gov.epsilon.hr.firm.dispatch..*,ps.gov.epsilon.hr.firm.employmentService..*,ps.gov.epsilon.hr.firm.loan..*,ps.gov.epsilon.hr.firm.lookups..*,ps.gov.epsilon.hr.firm.maritalStatus..*,ps.gov.epsilon.hr.firm.militaryCard..*,ps.gov.epsilon.hr.firm.profile..*,ps.gov.epsilon.hr.firm.promotion..*,ps.gov.epsilon.hr.firm.recruitment..*,ps.gov.epsilon.hr.firm.request..*,ps.gov.epsilon.hr.firm.salary..*,ps.gov.epsilon.hr.firm.secondment..*,ps.gov.epsilon.hr.firm.settings..*,ps.gov.epsilon.hr.firm.suspension..*,ps.gov.epsilon.hr.firm.training..*,ps.gov.epsilon.hr.firm.transfer..*,ps.gov.epsilon.hr.firm.vacation..*,ps.gov.epsilon.hr.firm.evaluation..*"
+String aocModulePackages = "ps.gov.epsilon.aoc.correspondences.absence..*," +
+        "ps.gov.epsilon.aoc.correspondences.allowance..*," +
+        "ps.gov.epsilon.aoc.correspondences.child..*," +
+        "ps.gov.epsilon.aoc.correspondences.common..*," +
+        "ps.gov.epsilon.aoc.correspondences.disciplinary..*," +
+        "ps.gov.epsilon.aoc.correspondences.dispatch..*," +
+        "ps.gov.epsilon.aoc.correspondences.endOfService..*," +
+        "ps.gov.epsilon.aoc.correspondences.evaluation..*," +
+        "ps.gov.epsilon.aoc.correspondences.loan..*," +
+        "ps.gov.epsilon.aoc.correspondences.maritalStatus..*," +
+        "ps.gov.epsilon.aoc.correspondences.promotion..*," +
+        "ps.gov.epsilon.aoc.correspondences.returnToService..*," +
+        "ps.gov.epsilon.aoc.correspondences.suspension..*," +
+        "ps.gov.epsilon.aoc.correspondences.transfer..*," +
+        "ps.gov.epsilon.aoc.correspondences.vacation..*," +
+        "ps.gov.epsilon.aoc.correspondences.violation..*," +
+        "ps.gov.epsilon.aoc.correspondences..*," +
+        "ps.gov.epsilon.aoc.firm.employee..*," +
+        "ps.gov.epsilon.aoc.lookups..*"
+String currentModule = "${developmentModule}"
+//don't change these line
+
+grails {
+    agent {
+        enabled = true
+        exclusions = "${commonPackages}${firmPackage}${departmentPackage}${departmentContactInfoPackage}${joinedDepartmentOperationalTasksPackage}${hrModulePackages.replace(currentModule,"")}"
+        inclusions = ""
+    }
+}
+
+bootRun{
+    jvmArgs '-Xss4096k'
+}

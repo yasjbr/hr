@@ -1,0 +1,37 @@
+package ps.gov.epsilon.hr.enums.v1
+
+/**
+ * Created by hatallah on 27/12/17.
+ */
+enum EnumFirmSetting {
+    //الحد المسموح به من الغياب
+    MAX_ABSENCE_DAYS("MAX_ABSENCE_DAYS"),
+    REPORT_LOGO_IMAGE_NAME("REPORT_LOGO_IMAGE_NAME"),
+    REPORT_GREEN_IMAGE_NAME("REPORT_GREEN_IMAGE_NAME"),
+    REPORT_MINISTRY_IMAGE_NAME("REPORT_MINISTRY_IMAGE_NAME"),
+    HEADER_ARABIC_COUNTRY_VALUE("HEADER_ARABIC_COUNTRY_VALUE"),
+    HEADER_ENGLISH_COUNTRY_VALUE("HEADER_ENGLISH_COUNTRY_VALUE"),
+    HEADER_ARABIC_MINISTRY_VALUE("HEADER_ARABIC_MINISTRY_VALUE"),
+    HEADER_ENGLISH_MINISTRY_VALUE("HEADER_ENGLISH_MINISTRY_VALUE"),
+    HEADER_ARABIC_ORGANIZATION_VALUE("HEADER_ARABIC_ORGANIZATION_VALUE"),
+    HEADER_ENGLISH_ORGANIZATION_VALUE("HEADER_ENGLISH_ORGANIZATION_VALUE"),
+    USER_NAME_LABEL_VALUE("USER_NAME_LABEL_VALUE"),
+
+    CENTRALIZED_WITH_AOC("CENTRALIZED_WITH_AOC")
+
+    final String value;
+
+    EnumFirmSetting(String value) {
+        this.value = value;
+    }
+
+
+    String getValue() {
+        toString()
+    }
+
+    String toString() {
+        return this.value.toString();
+    }
+
+}

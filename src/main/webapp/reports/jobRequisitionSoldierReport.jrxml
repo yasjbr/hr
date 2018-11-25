@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" language="groovy" columnDirection="RTL" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="e4a14bb5-ee06-4e82-a90f-c2c146837a8a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="45"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFEFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="REPORT_GREEN_IMAGE_INPUT_STREAM" class="java.io.InputStream"/>
+	<parameter name="REPORT_LOGO_IMAGE_INPUT_STREAM" class="java.io.InputStream"/>
+	<parameter name="REPORT_MINISTRY_IMAGE_INPUT_STREAM" class="java.io.InputStream"/>
+	<parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="USER_NAME" class="java.lang.String"/>
+	<parameter name="USER_NAME_LABEL" class="java.lang.String"/>
+	<parameter name="HEADER_ARABIC_COUNTRY" class="java.lang.String"/>
+	<parameter name="HEADER_ENGLISH_COUNTRY" class="java.lang.String"/>
+	<parameter name="HEADER_ARABIC_MINISTRY" class="java.lang.String"/>
+	<parameter name="HEADER_ENGLISH_MINISTRY" class="java.lang.String"/>
+	<parameter name="HEADER_ARABIC_ORGANIZATION" class="java.lang.String"/>
+	<parameter name="HEADER_ENGLISH_ORGANIZATION" class="java.lang.String"/>
+	<field name="jobTitleName" class="java.lang.String"/>
+	<field name="numberOfPositions" class="java.lang.Integer"/>
+	<field name="requestedForDepartmentName" class="java.lang.String"/>
+	<field name="recruitmentCycleName" class="java.lang.String"/>
+	<field name="recruitmentCycleFromDate" class="java.lang.String"/>
+	<field name="recruitmentCycleToDate" class="java.lang.String"/>
+	<variable name="usreNameLabel" class="java.lang.String">
+		<variableExpression><![CDATA["مستخدم"]]></variableExpression>
+	</variable>
+	<variable name="printDateLabel" class="java.lang.String">
+		<variableExpression><![CDATA["ت.ط"]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="215">
+			<line>
+				<reportElement x="0" y="123" width="555" height="1" uuid="0d33b0ef-2d36-41c0-9ede-30e767f91b1c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="126" width="555" height="1" uuid="ab74e0bd-b342-46be-9817-2c4df37ce286"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="135" width="525" height="20" isRemoveLineWhenBlank="true" uuid="9d4703d5-d831-49c5-b461-738382c698d1">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["نموذج تحديد الاحتياجات من ضباط الصف والأفراد"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="260" y="168" width="70" height="20" isRemoveLineWhenBlank="true" uuid="edbbbb3d-70b5-4e68-b254-c4fbaf8e4281">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["من تاريخ"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="170" y="168" width="85" height="20" isRemoveLineWhenBlank="true" uuid="aaacf44f-2e1f-4aca-878c-1630b3852ccb">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recruitmentCycleFromDate}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="227" y="10" width="91" height="113" uuid="43fe3d8f-a3bd-4c90-9aff-63c4d6b58765"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO_IMAGE_INPUT_STREAM}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="60" width="160" height="20" forecolor="#000000" uuid="59c2f1f1-d451-41cb-a1f4-1f010b8c351e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" pdfFontName="Arail" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_ENGLISH_MINISTRY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="79" width="159" height="20" forecolor="#000000" uuid="fa3a3fd5-48ef-46a9-906e-3fba6fc1f289"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="false" isItalic="false" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_ARABIC_ORGANIZATION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="21" width="160" height="20" forecolor="#000000" uuid="2787972a-81b0-451d-88a8-1efa569f49c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" pdfFontName="Arail" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_ARABIC_COUNTRY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="21" width="160" height="20" forecolor="#000000" uuid="d33475dc-fd8e-4568-8ad6-9807bdce623c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" pdfFontName="Arail" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_ENGLISH_COUNTRY}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="375" y="44" width="160" height="35" uuid="a44248a1-8cc8-4aa5-a46f-53b41afcfb5a"/>
+				<imageExpression><![CDATA[$P{REPORT_MINISTRY_IMAGE_INPUT_STREAM}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="80" width="160" height="20" forecolor="#000000" uuid="235d8232-f7cf-464c-bc7b-7dc2d864400a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" pdfFontName="Arail" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEADER_ENGLISH_ORGANIZATION}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="41" width="160" height="19" uuid="cc3d3b09-bd2b-4203-ae5e-1b7a5200374f"/>
+				<imageExpression><![CDATA[$P{REPORT_GREEN_IMAGE_INPUT_STREAM}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="168" width="70" height="20" isRemoveLineWhenBlank="true" uuid="b9538371-b65f-435d-ac72-61f25ef0c962">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["الى تاريخ"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="168" width="85" height="20" isRemoveLineWhenBlank="true" uuid="2bbf8663-1d7c-42b9-aab6-d7ab622c26c2">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recruitmentCycleToDate}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="135" width="525" height="20" isRemoveLineWhenBlank="true" uuid="d50e2ed0-ca22-4f1f-b64b-e4363371e571">
+					<printWhenExpression><![CDATA[$F{jobTitleName} == null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["لا يمكن اظهار النتائج بدون اختيار دورة تجنيدية"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="420" y="168" width="114" height="20" isRemoveLineWhenBlank="true" uuid="ceb705c6-46b2-41b1-9525-4766eee99730">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["للفترة التخطيطية / الموازنة"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="330" y="168" width="85" height="20" isRemoveLineWhenBlank="true" uuid="063ae01a-8711-405a-aa8a-9691e66f2544">
+					<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recruitmentCycleName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="28">
+			<textField evaluationTime="Report">
+				<reportElement x="38" y="2" width="15" height="20" uuid="6c36ec7a-8085-421f-8eec-16cf32cfcc76"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" /  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="210" y="2" width="75" height="20" uuid="5a275b15-4cf3-45aa-8a9b-6e77d20ea552"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{USER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="2" width="15" height="20" uuid="90b2907a-bb2b-4d14-8d70-2247f2edf7ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="285" y="2" width="59" height="20" uuid="0b9c8d26-abb8-42a1-8506-b725749afed1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{USER_NAME_LABEL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy HH:mm:ss">
+				<reportElement x="432" y="7" width="90" height="20" uuid="90d58efa-c01c-427e-98db-ae6470524c61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="522" y="7" width="20" height="20" uuid="84a0b14e-c809-41a4-9404-d5981e0c2fe2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{printDateLabel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="252">
+			<printWhenExpression><![CDATA[$F{jobTitleName} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement positionType="Float" x="9" y="128" width="532" height="120" uuid="6df4c4f7-04a6-4d27-a336-8a674dfea43a"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="355" y="142" width="183" height="20" uuid="5de0e204-5e6c-430b-9b9d-3cef361ec7f6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ملاحظات مسؤول وحدة الموارد البشرية"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="433" y="167" width="105" height="20" uuid="59a55b85-34cd-419f-abe5-66a7b5aebcd2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["التاريخ"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="355" y="192" width="183" height="20" uuid="5dba5380-162e-495c-9c3a-a3dddd82e56e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ملاحظات رئيس / مدير المؤسسة"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="147" y="167" width="105" height="20" uuid="0748414f-e3f5-46a0-bb19-fe657ff11b48"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["التوقيع"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="433" y="217" width="105" height="20" uuid="68cb672b-957a-468d-bfad-b3d0166b01f2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["التاريخ"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="147" y="217" width="105" height="20" uuid="76fd9343-b263-45a4-a1c6-00cad61d31b1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["التوقيع"]]></textFieldExpression>
+			</textField>
+			<crosstab>
+				<reportElement x="10" y="16" width="532" height="85" uuid="a457ab8b-560e-4912-a75c-f4ecdfda5a29"/>
+				<rowGroup name="jobTitleName" width="45" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{jobTitleName}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="45" height="25" uuid="d9315b5b-4953-452b-9c51-93608e6565b5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+									<paragraph leftIndent="1" rightIndent="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{jobTitleName}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#E6F3FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="45" height="25" uuid="1e63aa5b-8e61-4c51-82aa-3ab80b5fb726"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+									<font fontName="Arial" size="8" isBold="false" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[المجموع]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="requestedForDepartmentName" height="30" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{requestedForDepartmentName}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="30" height="30" uuid="11a61dce-1060-4997-86e2-538f2bcae423"/>
+								<textElement verticalAlignment="Middle" rotation="None">
+									<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+									<paragraph leftIndent="1" rightIndent="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{requestedForDepartmentName}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#E6F3FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="25" height="30" uuid="a941126b-c336-40b3-ac87-9ce600bc6116"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+									<font fontName="Arial" size="8" isBold="false" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+								</textElement>
+								<text><![CDATA[المجموع]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="numberOfPositionsMeasure" class="java.lang.Integer" calculation="Sum">
+					<measureExpression><![CDATA[$F{numberOfPositions}]]></measureExpression>
+				</measure>
+				<crosstabCell width="30" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="30" height="25" uuid="e723b3b3-594f-4804-a7fc-4d61db94db16"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{numberOfPositionsMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="30" height="25" rowTotalGroup="jobTitleName">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="30" height="25" uuid="2fdae411-49e8-45d9-83e9-318ed2b484fe"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{numberOfPositionsMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="25" columnTotalGroup="requestedForDepartmentName">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="25" height="25" uuid="d796d273-e1fd-4fd8-9239-0d89a907b80c"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{numberOfPositionsMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="25" height="25" rowTotalGroup="jobTitleName" columnTotalGroup="requestedForDepartmentName">
+					<cellContents backcolor="#E6F3FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="25" height="25" uuid="e065c04d-34d0-4109-851c-90c88f897f71"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="Arial" pdfFontName="Arial" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$V{numberOfPositionsMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>
